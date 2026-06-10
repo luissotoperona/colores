@@ -5,37 +5,52 @@
     <title>Ejercicios: Los Colores</title>
     <style>
         body { font-family: sans-serif; line-height: 1.6; max-width: 600px; margin: 40px auto; padding: 20px; color: #333; }
-        h2 { color: #008080; } /* Turquesa */
-        .ejercicio { background: #fff5eb; padding: 20px; border-radius: 8px; border-left: 5px solid #ff8c00; margin-bottom: 20px; } /* Naranja */
-        input { border: 1px solid #ccc; padding: 5px; border-radius: 4px; }
-        button { background-color: #008080; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        h2 { color: #008080; }
+        .ejercicio { background: #fff5eb; padding: 20px; border-radius: 8px; border-left: 5px solid #ff8c00; margin-bottom: 20px; }
+        input { border: 2px solid #ccc; padding: 5px; border-radius: 4px; width: 100px; }
+        input.correct { border-color: #28a745; background-color: #e9f7ef; }
+        input.incorrect { border-color: #dc3545; background-color: #fcecec; }
+        button { background-color: #008080; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <h2>1. Clasificación por reglas</h2>
-    <div class="ejercicio">
+    <div class="ejercicio" id="ej1">
         <table border="1" style="width:100%; border-collapse: collapse; text-align: center;">
             <tr><th>Color</th><th>Femenino</th><th>Plural</th></tr>
-            <tr><td>Rojo</td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td>Amarillo</td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td>Negro</td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td>Verde</td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td>Azul</td><td><input type="text"></td><td><input type="text"></td></tr>
+            <tr><td>Rojo</td><td><input type="text" data-ans="roja"></td><td><input type="text" data-ans="rojos"></td></tr>
+            <tr><td>Amarillo</td><td><input type="text" data-ans="amarilla"></td><td><input type="text" data-ans="amarillos"></td></tr>
+            <tr><td>Negro</td><td><input type="text" data-ans="negra"></td><td><input type="text" data-ans="negros"></td></tr>
+            <tr><td>Verde</td><td><input type="text" data-ans="verde"></td><td><input type="text" data-ans="verdes"></td></tr>
+            <tr><td>Azul</td><td><input type="text" data-ans="azul"></td><td><input type="text" data-ans="azules"></td></tr>
         </table>
     </div>
 
     <h2>2. Concordancia</h2>
-    <div class="ejercicio">
-        <p>La mesa es <input type="text"> (rojo)</p>
-        <p>Los coches son <input type="text"> (verde)</p>
-        <p>La camisa es <input type="text"> (amarillo)</p>
-        <p>Las flores son <input type="text"> (azul)</p>
-        <p>El libro es <input type="text"> (negro)</p>
-        <p>Las ventanas son <input type="text"> (blanco)</p>
+    <div class="ejercicio" id="ej2">
+        <p>La mesa es <input type="text" data-ans="roja"> (rojo)</p>
+        <p>Los coches son <input type="text" data-ans="verdes"> (verde)</p>
+        <p>La camisa es <input type="text" data-ans="amarilla"> (amarillo)</p>
+        <p>Las flores son <input type="text" data-ans="azules"> (azul)</p>
+        <p>El libro es <input type="text" data-ans="negro"> (negro)</p>
+        <p>Las ventanas son <input type="text" data-ans="blancas"> (blanco)</p>
     </div>
 
-    <button onclick="alert('¡Buen trabajo! Sigue practicando.')">Finalizar</button>
+    <button onclick="validar()">Comprobar resultados</button>
 
+    <script>
+        function validar() {
+            document.querySelectorAll('input').forEach(input => {
+                const valor = input.value.trim().toLowerCase();
+                const correcta = input.getAttribute('data-ans');
+                if (valor === correcta) {
+                    input.className = 'correct';
+                } else {
+                    input.className = 'incorrect';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
